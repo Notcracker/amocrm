@@ -19,7 +19,7 @@ $errors=array(
 $subdomain='test';
 
 //fetching results;
-function curlSetup($link,$errors,$newTask)
+function result($link,$errors,$newTask)
 {
   
   $curl=curl_init(); 
@@ -62,7 +62,7 @@ function curlSetup($link,$errors,$newTask)
 do {
   $link='https://'.$subdomain.'.amocrm.ru/private/api/v2/json/leads/list?limit_rows=500&limit_offset='.$leadOffset;
 
-  $Response = curlSetup($link,$errors,null);
+  $Response = result($link,$errors,null);
 
   $leadsFromThisReq=$Response['response']['leads'];
   $leads = array_merge($leads,$leadsFromThisReq);
@@ -74,7 +74,7 @@ do {
 do { 
   $link='https://'.$subdomain.'.amocrm.ru/private/api/v2/json/tasks/list?type=lead&limit_rows=500&limit_offset='.$taskOffset;
 
-  $Response = curlSetup($link,$errors,null);
+  $Response = result($link,$errors,null);
 
   $tasksFromThisReq = $Response['response']['tasks'];
   $tasks = array_merge($tasks,$tasksFromThisReq);
@@ -103,7 +103,7 @@ foreach ($leads as $lead) {
       'complete_till'=>1375285346
     )
   );
-  $Response = curlSetup($link,$errors,$newTask);
+  $Response = result($link,$errors,$newTask);
   $Response=$Response['response']['tasks']['add'];
    
   $output='ID добавленных задач:'.PHP_EOL;
