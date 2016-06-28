@@ -92,7 +92,7 @@ foreach ($leads as $lead) {
     array(
       'element_id'=>3698754, 
       'element_type'=>2,
-      'task_type'=>1, #Звонок
+      'task_type'=>1, 
       'text'=>'Сделка без задачи',
       'complete_till'=>1375285346
     )
