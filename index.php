@@ -44,8 +44,11 @@ do {
   }
    
   $Response=json_decode($out,true);
-  $Response=$Response['response'];
-} while();
+
+  $leadsFromThisReq=$Response['response']['leads'];
+  $leads = array_merge($leads,$leadsFromThisReq);
+  $leadOffset += 500;
+} while(count($leadsFromThisReq)==500);
 
 
 do { 
@@ -76,7 +79,8 @@ do {
 
   $Response=json_decode($out,true);
   $tasksFromThisReq = $Response['response']['tasks'];
-  array_merge($tasks,$tasksFromThisReq);
+  $tasks = array_merge($tasks,$tasksFromThisReq);
+  $taskOffset += 500;
 } while(count($tasksFromThisReq)==500);
 
 ?>
