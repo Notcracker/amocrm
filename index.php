@@ -90,7 +90,7 @@ foreach ($tasks as $task) {
 foreach ($leads as $lead) {
   $newTask['request']['tasks']['add']=array(
     array(
-      'element_id'=>3698754, 
+      'element_id'=$lead['id']>, 
       'element_type'=>2,
       'task_type'=>1, 
       'text'=>'Сделка без задачи',
