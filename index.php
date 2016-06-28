@@ -1,7 +1,6 @@
 <?php 
-
-function getTasks($offset)
-{
+$Tasks = array();
+do {
   $subdomain='test'; 
   $link='https://'.$subdomain.'.amocrm.ru/private/api/v2/json/tasks/list?type=lead&limit_rows=500&limit_offset='.$offset;
   $curl=curl_init(); 
@@ -38,14 +37,8 @@ function getTasks($offset)
   }
 
   $Response=json_decode($out,true);
-  $Tasks=$Response['response']['tasks'];
-  if (count($Tasks)==500) {
-    sleep(1);
-    $offset+=500;
-    getTasks();
-  }
-}
-
-getTasks();
+  $tasksFromThisReq = $Response['response']['tasks'];
+  array_merge($Tasks,$tasksFromThisReq);
+} while(count($tasksFromThisReq));
 
 ?>
